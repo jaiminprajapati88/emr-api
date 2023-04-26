@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "E2q8fLxUSXTyGD0cQLEA4YxgqHxOmpnO0nDjhGkZgcxSz6REwa7BDi08leb/ra59W2T7hemJj3vLbMphqRybxQ==",
+  "success": true,
+  "projectFilePath": "D:\\Work\\emr-api\\MedicalTourismDataLayer\\MedicalTourismDataLayer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dave_\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\dave_\\.nuget\\packages\\npgsql\\7.0.2\\npgsql.7.0.2.nupkg.sha512",
+    "C:\\Users\\dave_\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
