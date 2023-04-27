@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalTourismDataLayer.DataModels
+namespace MedicalTourismDataLayer.DataModels.Config
 {
     public class MessageModel : BaseModel
     {

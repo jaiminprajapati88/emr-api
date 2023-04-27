@@ -22,7 +22,7 @@ namespace MedicalTourismConfig
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

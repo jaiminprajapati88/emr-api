@@ -21,8 +21,8 @@ namespace MedicalTourismBusinessLogic
             if (!registerUser.EmailAddress.IsValidEmail())
                 throw new Exception("Email Exception", new Exception("Invalid User Email"));
 
-            int PasswordSalt = GenerateSaltForPassword();
-            byte[] PasswordHash = GeneratePasswordHash(registerUser.EmailPassword, PasswordSalt);
+            int PasswordSalt = GenerateSalt();
+            byte[] PasswordHash = registerUser.EmailPassword.GenerateHash(PasswordSalt);
 
 
             Guid UserId = Guid.NewGuid();
@@ -97,7 +97,7 @@ namespace MedicalTourismBusinessLogic
                 cmd.Parameters.Add(new NpgsqlParameter<DateTime>("RowUpdateStamp", NpgsqlTypes.NpgsqlDbType.Timestamp) { TypedValue = usr.RowUpdateStamp }); //@RowUpdateStamp
                 cmd.Parameters.Add(new NpgsqlParameter<string>("RowUpdateUserId", NpgsqlTypes.NpgsqlDbType.Text) { TypedValue = usr.RowUpdateUserId }); //@RowUpdateUserId
 
-                new AzurePostgresDataLayer().executeData(cmd, System.Data.CommandType.Text);
+                new AzurePostgresDataLayer().ExecuteData(cmd, System.Data.CommandType.Text);
             };
 
             sql = "select * from \"User\".\"UserDetails\" where \"IsActive\" =  true and \"UserId\" = '" + UserId + "')";
@@ -106,7 +106,7 @@ namespace MedicalTourismBusinessLogic
 
             using (var command = new NpgsqlCommand(sql))
             {
-                RegisterUserRequest = new AzurePostgresDataLayer().getData<RegisterUserRequest2>(sql);
+                RegisterUserRequest = new AzurePostgresDataLayer().GetData<RegisterUserRequest2>(sql);
             }
 
             return RegisterUserRequest.First();
@@ -176,7 +176,7 @@ namespace MedicalTourismBusinessLogic
                 cmd.Parameters.Add(new NpgsqlParameter<DateTime>("RowUpdateStamp", NpgsqlTypes.NpgsqlDbType.Timestamp) { TypedValue = usr.RowUpdateStamp }); //@RowUpdateStamp
                 cmd.Parameters.Add(new NpgsqlParameter<string>("RowUpdateUserId", NpgsqlTypes.NpgsqlDbType.Text) { TypedValue = usr.RowUpdateUserId }); //@RowUpdateUserId
 
-                new AzurePostgresDataLayer().executeData(cmd, System.Data.CommandType.Text);
+                new AzurePostgresDataLayer().ExecuteData(cmd, System.Data.CommandType.Text);
             };
 
             string sql = "select * from \"User\".\"UserDetails\" where \"IsActive\" =  true and \"UserId\" = '" + usr.UserId + "')";
@@ -185,7 +185,7 @@ namespace MedicalTourismBusinessLogic
 
             using (var command = new NpgsqlCommand(sql))
             {
-                RegisterUserRequest = new AzurePostgresDataLayer().getData<RegisterUserRequest2>(sql);
+                RegisterUserRequest = new AzurePostgresDataLayer().GetData<RegisterUserRequest2>(sql);
             }
 
             return RegisterUserRequest.First();
@@ -199,13 +199,13 @@ namespace MedicalTourismBusinessLogic
 
             using (var command = new NpgsqlCommand(sql))
             {
-                RegisterUserRequest = new AzurePostgresDataLayer().getData<UserCredentialsDBData>(sql);
+                RegisterUserRequest = new AzurePostgresDataLayer().GetData<UserCredentialsDBData>(sql);
             }
 
             var _usr = RegisterUserRequest.First();
 
             int PasswordSalt = _usr.PasswordSalt;
-            byte[] PasswordHash = GeneratePasswordHash(tmpUsr.UserPassword, PasswordSalt);
+            byte[] PasswordHash = tmpUsr.UserPassword.GenerateHash(PasswordSalt);
 
             UserLoginDBData usr = new UserLoginDBData()
             {
@@ -231,7 +231,7 @@ namespace MedicalTourismBusinessLogic
                 cmd.Parameters.Add(new NpgsqlParameter<int>("PasswordSalt", NpgsqlTypes.NpgsqlDbType.Integer) { TypedValue = PasswordSalt }); //@PasswordSalt
                 cmd.Parameters.Add(new NpgsqlParameter<byte[]>("PasswordHash", NpgsqlTypes.NpgsqlDbType.Bytea) { TypedValue = PasswordHash }); //@PasswordHash
 
-                new AzurePostgresDataLayer().executeData(cmd, System.Data.CommandType.Text);
+                new AzurePostgresDataLayer().ExecuteData(cmd, System.Data.CommandType.Text);
             };
 
             sql = "select * from \"User\".\"UserDetails\" where \"IsActive\" =  true and \"UserId\" = '" + usr.UserId + "')";
@@ -240,7 +240,7 @@ namespace MedicalTourismBusinessLogic
 
             using (var command = new NpgsqlCommand(sql))
             {
-                RegisterUserRequest2 = new AzurePostgresDataLayer().getData<RegisterUserRequest2>(sql);
+                RegisterUserRequest2 = new AzurePostgresDataLayer().GetData<RegisterUserRequest2>(sql);
             }
 
             return RegisterUserRequest2.First();
@@ -268,13 +268,13 @@ namespace MedicalTourismBusinessLogic
                 cmd.Parameters.Add(new NpgsqlParameter<DateTime>("RowUpdateStamp", NpgsqlTypes.NpgsqlDbType.Timestamp) { TypedValue = usr.RowUpdateStamp }); //@RowUpdateStamp
                 cmd.Parameters.Add(new NpgsqlParameter<string>("RowUpdateUserId", NpgsqlTypes.NpgsqlDbType.Text) { TypedValue = usr.RowUpdateUserId }); //@RowUpdateUserId
 
-                new AzurePostgresDataLayer().executeData(cmd, System.Data.CommandType.Text);
+                new AzurePostgresDataLayer().ExecuteData(cmd, System.Data.CommandType.Text);
             };
 
 
             using (var command = new NpgsqlCommand(sb.ToString()))
             {
-                new AzurePostgresDataLayer().executeData(command, System.Data.CommandType.Text);
+                new AzurePostgresDataLayer().ExecuteData(command, System.Data.CommandType.Text);
             }
 
             string sql = "select * from \"User\".\"UserDetails\" where \"IsActive\" =  true and \"UserId\" = '" + usr.UserId + "')";
@@ -283,7 +283,7 @@ namespace MedicalTourismBusinessLogic
 
             using (var command = new NpgsqlCommand(sql))
             {
-                RegisterUserRequest = new AzurePostgresDataLayer().getData<RegisterUserRequest2>(sql);
+                RegisterUserRequest = new AzurePostgresDataLayer().GetData<RegisterUserRequest2>(sql);
             }
 
             return RegisterUserRequest.First();
@@ -297,7 +297,7 @@ namespace MedicalTourismBusinessLogic
 
             using (var command = new NpgsqlCommand(sql))
             {
-                RegisterUserRequest = new AzurePostgresDataLayer().getData<RegisterUserRequest2>(sql);
+                RegisterUserRequest = new AzurePostgresDataLayer().GetData<RegisterUserRequest2>(sql);
             }
 
             return RegisterUserRequest;
@@ -311,7 +311,7 @@ namespace MedicalTourismBusinessLogic
 
             using (var command = new NpgsqlCommand(sql))
             {
-                RegisterUserRequest = new AzurePostgresDataLayer().getData<RegisterUserRequest2>(sql);
+                RegisterUserRequest = new AzurePostgresDataLayer().GetData<RegisterUserRequest2>(sql);
             }
 
             return RegisterUserRequest;

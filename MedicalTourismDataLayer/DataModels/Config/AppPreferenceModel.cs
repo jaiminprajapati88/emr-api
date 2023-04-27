@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalTourismDataLayer.DataModels
+namespace MedicalTourismDataLayer.DataModels.Config
 {
     public class AppPreferenceModel : BaseModel
     {
@@ -12,5 +12,5 @@ namespace MedicalTourismDataLayer.DataModels
         public string PreferenceValue { get; set; }
         public string PreferenceDesc { get; set; }
         public bool IsConfig { get; set; }
-    }  
+    }
 }

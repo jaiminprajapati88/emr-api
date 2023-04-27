@@ -15,13 +15,13 @@ namespace MedicalTourismBusinessLogic
 
             string sql = "SELECT \"UserId\", \"Title\", \"FirstName\", \"MiddleName\", \"LastName\", \"Gender\", \"DateOfBirth\", \"CellNo\", \"EmailAddress\", \"PasswordSalt\", \"PasswordHash\", \"AddressLine1\", \"AddressLine2\", \"City\", \"State\", \"Country\", \"CountryCode\", \"Zipcode\", \"UserRoleId\", \"IsActive\", \"RowAddStamp\", \"RowAddUserId\", \"RowUpdateStamp\", \"RowUpdateUserId\"\r\n\tFROM \"User\".\"UserDetails\" where \"EmailAddress\" = '" + userLoginAppInData.UserEmail + "'";
 
-            var result = new AzurePostgresDataLayer().getData<UserLoginDBData>(sql);
+            var result = new AzurePostgresDataLayer().GetData<UserLoginDBData>(sql);
 
             if (result.Count == 1)
             {
                 UserLoginDBData usr = result[0];
 
-                if (generatePassword(userLoginAppInData.UserPassword, usr.PasswordSalt, usr.PasswordHash))
+                if (userLoginAppInData.UserPassword.IsValidHash(usr.PasswordSalt, usr.PasswordHash))
                 {
                     return usr;
                 }
@@ -41,15 +41,15 @@ namespace MedicalTourismBusinessLogic
 
             string sql = "SELECT \"UserId\", \"Title\", \"FirstName\", \"MiddleName\", \"LastName\", \"Gender\", \"DateOfBirth\", \"CellNo\", \"EmailAddress\", \"PasswordSalt\", \"PasswordHash\", \"AddressLine1\", \"AddressLine2\", \"City\", \"State\", \"Country\", \"CountryCode\", \"Zipcode\", \"UserRoleId\", \"IsActive\", \"RowAddStamp\", \"RowAddUserId\", \"RowUpdateStamp\", \"RowUpdateUserId\"\r\n\tFROM \"User\".\"UserDetails\" where \"EmailAddress\" = '" + userLoginAppInData.UserEmail + "'";
 
-            var result = new AzurePostgresDataLayer().getData<UserLoginDBData>(sql);
+            var result = new AzurePostgresDataLayer().GetData<UserLoginDBData>(sql);
 
             if (result.Count == 1)
             {
                 UserLoginDBData usr = result[0];
 
-                if (generatePassword(userLoginAppInData.UserOldPassword, usr.PasswordSalt, usr.PasswordHash))
+                if (userLoginAppInData.UserOldPassword.IsValidHash(usr.PasswordSalt, usr.PasswordHash))
                 {
-                    byte[] PasswordHash = GeneratePasswordHash(userLoginAppInData.UserNewPassword, usr.PasswordSalt);
+                    byte[] PasswordHash = userLoginAppInData.UserNewPassword.GenerateHash(usr.PasswordSalt);
 
                     new UserAppLogic().UpdateUserCredentials(new UserLoginAppInData()
                     {

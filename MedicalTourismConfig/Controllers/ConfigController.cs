@@ -1,17 +1,25 @@
 using MedicalTourismBusinessLogic;
-using MedicalTourismDataLayer.DataModels;
+using MedicalTourismDataLayer.DataModels.Config;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalTourismConfig.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/config")]
     public class ConfigController : ControllerBase
     {
-        [HttpGet(Name = "ReferenceAppLogic")]
-        public ReferenceModel Get()
+        [HttpGet]
+        [Route("all")]
+        public ConfigModel GetAllConfig()
         {
-           return new ReferenceAppLogic().getAllReferences();
+           return new ConfigAppLogic().GetAllConfigurations();
+        }
+
+        [HttpGet]
+        [Route("settings")]
+        public List<AppPreferenceModel> GetConfigPreferences()
+        {
+            return new ConfigAppLogic().GetConfigPreferences();
         }
     }
 }

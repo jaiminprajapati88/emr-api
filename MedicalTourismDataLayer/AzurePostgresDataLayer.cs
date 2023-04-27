@@ -25,7 +25,7 @@ namespace MedicalTourismDataLayer
                     Password);
         }
 
-        public List<T> getData<T>(string sql)
+        public List<T> GetData<T>(string sql)
         {
             try
             {
@@ -43,8 +43,6 @@ namespace MedicalTourismDataLayer
 
                     adapter.Fill(dataSet, "TestTable");
 
-                    //List<T> lst = dataSet.Tables["TestTable"].ToListof<T>();
-
                     List<T> lst = new List<T>();
 
                     if (dataSet.Tables["TestTable"].Rows.Count > 0)
@@ -56,11 +54,11 @@ namespace MedicalTourismDataLayer
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
-        public void executeData(NpgsqlCommand command, CommandType commandType)
+        public void ExecuteData(NpgsqlCommand command, CommandType commandType)
         {
             try
             {
@@ -77,7 +75,7 @@ namespace MedicalTourismDataLayer
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Reflection;
 using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 public static class ExtentionMethods
@@ -50,4 +51,26 @@ public static class ExtentionMethods
 
         return targetList;
    }
+
+    public static byte[] GenerateHash(this string value, int salt) {
+        byte[] numArray = new byte[4]
+                {
+                (byte) (salt >> 24),
+                (byte) (salt >> 16),
+                (byte) (salt >> 8),
+                (byte) salt
+                };
+
+        byte[] bytes = Encoding.UTF8.GetBytes(value);
+        byte[] buffer = new byte[numArray.Length + bytes.Length];
+        Buffer.BlockCopy(bytes, 0, buffer, 0, bytes.Length);
+        Buffer.BlockCopy(numArray, 0, buffer, bytes.Length, numArray.Length);
+        return SHA1.Create().ComputeHash(buffer);
+    }
+
+    public static bool IsValidHash(this string value, int salt, byte[] A_2)
+    {
+        byte[] hash = value.GenerateHash(salt);
+        return hash.SequenceEqual<byte>(A_2);
+    }
 }

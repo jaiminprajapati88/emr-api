@@ -1,6 +1,5 @@
 ﻿using MedicalTourismBusinessLogic;
 using MedicalTourismDataLayer.DataModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalTourism.Controllers
@@ -18,7 +17,7 @@ namespace MedicalTourism.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -31,7 +30,7 @@ namespace MedicalTourism.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
     }
