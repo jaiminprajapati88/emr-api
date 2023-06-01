@@ -13,6 +13,7 @@ namespace EMR.UnitOfWork.SqlServer
 
         private EmrContext _context { get; set; }
 
+        private IAppointmentRepository _appointmentRepository = null;
         private IAuthRepostiroy? _authRepository = null;
         private IConfigRepository? _configRepository = null;
         private IOrganizationRepository? _organizationRepository = null;
@@ -22,6 +23,19 @@ namespace EMR.UnitOfWork.SqlServer
         #endregion Private Properties
 
         #region Public Properties
+
+        public IAppointmentRepository AppointmentRepository
+        {
+            get
+            {
+                if (_appointmentRepository == null)
+                {
+                    _appointmentRepository = new AppointmentRepository(_context);
+                }
+
+                return _appointmentRepository;
+            }
+        }
 
         public IAuthRepostiroy AuthRepository
         {

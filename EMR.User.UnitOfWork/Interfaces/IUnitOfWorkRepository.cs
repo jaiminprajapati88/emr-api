@@ -4,6 +4,7 @@ namespace EMR.UnitOfWork.Interfaces
 {
     public interface IUnitOfWorkRepository : IDisposable
     {
+        IAppointmentRepository AppointmentRepository { get; }
         IAuthRepostiroy AuthRepository { get; }
         IConfigRepository ConfigRepository { get; }
         IOrganizationRepository OrganizationRepository { get; }

@@ -93,6 +93,7 @@ public partial class EmrContext : DbContext
             entity.ToTable("Appointment", "Organization");
 
             entity.Property(e => e.AppointmentId).UseIdentityAlwaysColumn();
+            entity.Property(e => e.AppointmentDateTime).HasColumnType("timestamp without time zone");
             entity.Property(e => e.Notes).HasMaxLength(500);
             entity.Property(e => e.Payment).HasPrecision(5, 2);
             entity.Property(e => e.Remarks).HasMaxLength(1000);
@@ -108,6 +109,8 @@ public partial class EmrContext : DbContext
             entity.Property(e => e.RowUpdateUserId)
                 .HasMaxLength(255)
                 .HasDefaultValueSql("'SYSTEM'::character varying");
+            entity.Property(e => e.ServiceDiscount).HasPrecision(5, 2);
+            entity.Property(e => e.ServiceQty).HasPrecision(1);
 
             entity.HasOne(d => d.OrganizationDetail).WithMany(p => p.Appointments)
                 .HasForeignKey(d => d.OrganizationDetailId)
@@ -118,16 +121,6 @@ public partial class EmrContext : DbContext
                 .HasForeignKey(d => d.PatientDetailId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("appointment_patientdetail_fk");
-
-            entity.HasOne(d => d.Purpose).WithMany(p => p.AppointmentPurposes)
-                .HasForeignKey(d => d.PurposeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("appointment_purpose_fk");
-
-            entity.HasOne(d => d.Status).WithMany(p => p.AppointmentStatuses)
-                .HasForeignKey(d => d.StatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("appointment_status_fk");
 
             entity.HasOne(d => d.UserDetail).WithMany(p => p.Appointments)
                 .HasForeignKey(d => d.UserDetailId)
@@ -155,11 +148,9 @@ public partial class EmrContext : DbContext
                 .HasMaxLength(255)
                 .HasDefaultValueSql("'SYSTEM'::character varying");
             entity.Property(e => e.ServiceCode).HasMaxLength(20);
-            entity.Property(e => e.ServiceGst)
-                .HasPrecision(3, 2)
-                .HasColumnName("ServiceGST");
             entity.Property(e => e.ServiceName).HasMaxLength(100);
             entity.Property(e => e.ServicePrice).HasPrecision(5, 2);
+            entity.Property(e => e.ServiceTax).HasPrecision(3, 2);
 
             entity.HasOne(d => d.OrganizationDetail).WithMany(p => p.AppointmentServices)
                 .HasForeignKey(d => d.OrganizationDetailId)
@@ -513,7 +504,7 @@ public partial class EmrContext : DbContext
 
             entity.ToTable("PatientDetails", "Patient");
 
-            entity.Property(e => e.PatientDetailId).ValueGeneratedNever();
+            entity.Property(e => e.PatientDetailId).HasDefaultValueSql("gen_random_uuid()");
             entity.Property(e => e.DateOfBirth).HasColumnType("timestamp without time zone");
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.FirstNamePerm).HasMaxLength(50);

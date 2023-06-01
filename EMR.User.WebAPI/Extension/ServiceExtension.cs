@@ -21,6 +21,7 @@ namespace EMR.WebAPI.Extension
 
             services.AddScoped<IJwtUtils, JwtUtils>();
             services.AddScoped<IUnitOfWork, UnitOfWorkSqlServer>();
+            services.AddScoped<IAppointmentService, Services.Services.AppointmentService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IConfigService, ConfigService>();
             services.AddScoped<IOrganizationService, OrganizationService>();

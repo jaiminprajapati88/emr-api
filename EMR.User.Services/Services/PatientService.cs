@@ -94,9 +94,12 @@ namespace EMR.Services.Services
                 {
                     patientEntity = patients.Result.SingleOrDefault(p => p.PatientDetailId == patient.PatientDetailId);
                     patient.CopyProperties(patientEntity);
+                    patientEntity.RowUpdateStamp = DateTime.Now;
+                    patientEntity.RowUpdateUserId = "SYSTEM";
                 }
                 else
                 {
+                    ;
                     patientEntity.PatientOrganizations.Add(new PatientOrganization()
                     {
                         OrganizationDetailId = patient.OrganizationDetailId

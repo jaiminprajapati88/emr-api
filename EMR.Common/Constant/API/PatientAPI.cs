@@ -13,6 +13,5 @@ namespace EMR.Common.Constant.API
         public const string GET_ALL_BY_ORG = "organization";
         public const string GET_DETAIL_BY_ID = "detail";
         public const string SEARCH = "search";
-        public const string SAVE = "save";
     }
 }

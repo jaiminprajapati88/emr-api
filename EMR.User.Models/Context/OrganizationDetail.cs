@@ -1,4 +1,7 @@
-﻿namespace EMR.Data.Context;
+﻿using System;
+using System.Collections.Generic;
+
+namespace EMR.Data.Context;
 
 public partial class OrganizationDetail
 {

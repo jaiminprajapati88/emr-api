@@ -15,7 +15,7 @@ public partial class AppointmentService
 
     public decimal ServicePrice { get; set; }
 
-    public decimal? ServiceGst { get; set; }
+    public decimal? ServiceTax { get; set; }
 
     public string? ServiceCode { get; set; }
 

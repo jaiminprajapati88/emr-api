@@ -39,7 +39,6 @@ namespace EMR.WebAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route(OrganizationAPI.SAVE)]
         public async Task<IActionResult> SaveOrganization([FromBody] SaveOrganizationRequestModel model)
         {
             var result = await _organizationService.Save(model);
@@ -52,7 +51,6 @@ namespace EMR.WebAPI.Controllers
         /// <param name="organizationDetailId"></param>
         /// <returns></returns>
         [HttpDelete]
-        [Route(OrganizationAPI.DELETE)]
         public async Task<IActionResult> DeleteOrganization(Guid organizationDetailId)
         {
             return Ok(

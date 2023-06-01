@@ -1,9 +1,4 @@
 using EMR.Data.Model.Settings;
-using EMR.Services.Interfaces;
-using EMR.Services.Services;
-using EMR.UnitOfWork.Interfaces;
-using EMR.UnitOfWork.SqlServer;
-using EMR.WebAPI.Authorization;
 using EMR.WebAPI.Extension;
 using EMR.WebAPI.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

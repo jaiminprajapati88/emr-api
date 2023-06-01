@@ -25,6 +25,8 @@ namespace EMR.Repository.Core
 
         public async Task<T> GetById<T>(int id) where T : class => await _context.Set<T>().FindAsync(id);
 
+        public async Task<T> GetById<T>(long id) where T : class => await _context.Set<T>().FindAsync(id);
+
         public async Task<T> GetById<T>(Guid id) where T : class => await _context.Set<T>().FindAsync(id);
 
         public async Task<List<T>> GetAll<T>(Func<T, bool>? predicate = null) where T : class => await _context.Set<T>().Where(predicate).AsQueryable().ToListAsyncSafe();

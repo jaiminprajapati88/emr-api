@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using EMR.Data.Context;
+using EMR.Data.Model.Appointment;
+using EMR.Data.Model.Appointment.Request;
 using EMR.Data.Model.Config;
 using EMR.Data.Model.Organization.Request;
 using EMR.Data.Model.Patient;
@@ -28,6 +30,11 @@ namespace EMR.Data.Mapper
 
             CreateMap<SavePatientRequestModel, PatientDetail>();
             CreateMap<PatientDetail, PatientDetailModel>();
+
+            CreateMap<Appointment, AppointmentModel>();
+            CreateMap<SaveAppointmentModel, Appointment>();
+            CreateMap<AppointmentService, AppointmentServiceModel>();
+            CreateMap<SaveAppointmentServiceModel, AppointmentService>();
         }
     }
 }

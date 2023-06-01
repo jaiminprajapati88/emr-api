@@ -26,7 +26,7 @@ namespace EMR.Repository.SqlServer
                         where org.OrganizationDetailId == organizationDetailId && patient.IsActive == true
                         select patient;
 
-            return await query.ToListAsync();
+            return await query.AsQueryable().ToListAsyncSafe();
         }
 
         public async Task<IEnumerable<PatientDetail>> Search(SearchPatientRequestModel search)

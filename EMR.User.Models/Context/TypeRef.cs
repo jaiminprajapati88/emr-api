@@ -25,10 +25,6 @@ public partial class TypeRef
 
     public string RowUpdateUserId { get; set; } = null!;
 
-    public virtual ICollection<Appointment> AppointmentPurposes { get; set; } = new List<Appointment>();
-
-    public virtual ICollection<Appointment> AppointmentStatuses { get; set; } = new List<Appointment>();
-
     public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 
     public virtual ICollection<OrganizationDetail> OrganizationDetails { get; set; } = new List<OrganizationDetail>();

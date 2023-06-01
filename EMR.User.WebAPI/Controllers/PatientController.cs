@@ -63,7 +63,6 @@ namespace EMR.WebAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route(PatientAPI.SAVE)]
         public async Task<IActionResult> Save([FromBody] SavePatientRequestModel model)
         {
             var result = await _patientService.Save(model);

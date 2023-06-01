@@ -13,15 +13,17 @@ public partial class Appointment
 
     public Guid PatientDetailId { get; set; }
 
-    public DateOnly AppointmentDateTime { get; set; }
+    public DateTime AppointmentDateTime { get; set; }
 
     public int ServiceId { get; set; }
+
+    public decimal? ServiceQty { get; set; }
+
+    public decimal? ServiceDiscount { get; set; }
 
     public decimal? Payment { get; set; }
 
     public int StatusId { get; set; }
-
-    public int PurposeId { get; set; }
 
     public string? Remarks { get; set; }
 
@@ -40,10 +42,6 @@ public partial class Appointment
     public virtual OrganizationDetail OrganizationDetail { get; set; } = null!;
 
     public virtual PatientDetail PatientDetail { get; set; } = null!;
-
-    public virtual TypeRef Purpose { get; set; } = null!;
-
-    public virtual TypeRef Status { get; set; } = null!;
 
     public virtual UserDetail UserDetail { get; set; } = null!;
 }
